@@ -1,61 +1,81 @@
-const int MAX = 100;
-const int EMPTY_STACK = -1;
-template <class T>
-class Stack
-{
-	T a[MAX];
-	int m_top;
-public:
-	Stack();
-	bool empty() const;
+#ifndef STACK_H_
+#define STACK_H_
+
+int const MAX = 100;
+template <typename TYPE>
+class Stack {
+private:
+	TYPE a[MAX];	// елементите на стека
+	int topIndex;	// индекс на последния елемент
+
+				// проверка дали стек е пълен
 	bool full() const;
 
-	T top() const;
-	void push(T const&);
-	T pop();
-	int getIdx() const { return m_top; }
+public:
+
+	// създаване на празен стек
+	Stack();
+
+	// селектори
+
+	// проверка дали стек е празен
+	bool empty() const;
+
+	// намиране на елемента на върха на стека
+	TYPE top() const;
+
+	// мутатори
+
+	// включване на елемент
+	void push(TYPE const&);
+
+	// изключване на елемент
+	int pop();
 };
 
-template <class T>
-Stack<T>::Stack() : m_top(EMPTY_STACK) {}
+int const EMPTY_STACK = -1; // отбелязваме празен стек
 
-template <class T>
-bool Stack<T>::empty() const
-{
-	return m_top == EMPTY_STACK;
+template <typename TYPE>
+inline Stack<TYPE>::Stack() {
+	topIndex = EMPTY_STACK;
 }
 
-template <class T>
-bool Stack<T>::full() const
-{
-	return m_top == MAX - 1;
+template <typename TYPE>
+inline bool Stack<TYPE>::empty() const {
+	return topIndex == EMPTY_STACK;
 }
-template <class T>
-T Stack<T>::pop()
-{
+
+template <typename TYPE>
+inline TYPE Stack<TYPE>::top() const {
 	if (empty()) {
-		std::cout << "Р“СЂРµС€РєР°: РѕРїРёС‚ Р·Р° РёР·РєР»СЋС‡РІР°РЅРµ РѕС‚ РїСЂР°Р·РµРЅ СЃС‚РµРє!\n";
+		std::cout << "Грешка: опит за поглеждане в празен стек!\n";
 		return 0;
 	}
-	return a[m_top--];	
+
+	return a[topIndex];
 }
-template <class T>
-void Stack<T>::push(T const& rhs)
-{
+
+template <typename TYPE>
+inline void Stack<TYPE>::push(TYPE const& x) {
 	if (full()) {
-		std::cout << "full stack!\n";
+		std::cout << "Грешка: опит за включване в пълен стек!\n";
 	}
 	else
-		a[++m_top] = rhs;
+		a[++topIndex] = x;
 }
 
-template <class T>
-T Stack<T>:: top() const
-{
+template <typename TYPE>
+inline bool Stack<TYPE>::full() const {
+	return topIndex == MAX - 1;
+}
+
+template <typename TYPE>
+inline int Stack<TYPE>::pop() {
 	if (empty()) {
-		std::cout << "Р“СЂРµС€РєР°: РѕРїРёС‚ Р·Р° РїРѕРіР»РµР¶РґР°РЅРµ РІ РїСЂР°Р·РµРЅ СЃС‚РµРє!\n";
+		std::cout << "Грешка: опит за изключване от празен стек!\n";
 		return 0;
 	}
-
-	return a[m_top];
+	return a[topIndex--];
 }
+
+#endif /* STACK_H_ */

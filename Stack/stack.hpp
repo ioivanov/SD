@@ -13,7 +13,6 @@ public:
 	T top() const;
 	void push(T const&);
 	T pop();
-	int getIdx() const { return topIndex; }
 };
 
 template <class T>

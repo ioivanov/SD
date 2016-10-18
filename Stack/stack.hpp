@@ -4,7 +4,7 @@ template <class T>
 class Stack
 {
 	T a[MAX];
-	int m_top;
+	int topIndex;
 public:
 	Stack();
 	bool empty() const;
@@ -13,22 +13,22 @@ public:
 	T top() const;
 	void push(T const&);
 	T pop();
-	int getIdx() const { return m_top; }
+	int getIdx() const { return topIndex; }
 };
 
 template <class T>
-Stack<T>::Stack() : m_top(EMPTY_STACK) {}
+Stack<T>::Stack() : topIndex(EMPTY_STACK) {}
 
 template <class T>
 bool Stack<T>::empty() const
 {
-	return m_top == EMPTY_STACK;
+	return topIndex == EMPTY_STACK;
 }
 
 template <class T>
 bool Stack<T>::full() const
 {
-	return m_top == MAX - 1;
+	return topIndex == MAX - 1;
 }
 template <class T>
 T Stack<T>::pop()
@@ -37,7 +37,7 @@ T Stack<T>::pop()
 		std::cout << "Грешка: опит за изключване от празен стек!\n";
 		return 0;
 	}
-	return a[m_top--];	
+	return a[topIndex--];
 }
 template <class T>
 void Stack<T>::push(T const& rhs)
@@ -46,16 +46,16 @@ void Stack<T>::push(T const& rhs)
 		std::cout << "full stack!\n";
 	}
 	else
-		a[++m_top] = rhs;
+		a[++topIndex] = rhs;
 }
 
 template <class T>
-T Stack<T>:: top() const
+T Stack<T>::top() const
 {
 	if (empty()) {
 		std::cout << "Грешка: опит за поглеждане в празен стек!\n";
 		return 0;
 	}
 
-	return a[m_top];
+	return a[topIndex];
 }

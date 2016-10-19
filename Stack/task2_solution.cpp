@@ -37,17 +37,31 @@ int main()
 
 	if (num1.empty())
 	{
+		if (!num2.empty())
+		{
+			newNum.push(residue + num2.pop());
+			residue = 0;
+		}
+			
+
 		while(!num2.empty())
 		 newNum.push(num2.pop());
 	}
 		
 	else
 	{
+		if (!num1.empty())
+		{
+			newNum.push(residue + num1.pop());
+			residue = 0;
+		}
+			
 		while(!num1.empty())
 			newNum.push(num1.pop());
 	}
-	if (residue != 0)
+	if (residue)
 		newNum.push(residue);
+	
 	while(!newNum.empty())
 		std::cout << newNum.pop();
 

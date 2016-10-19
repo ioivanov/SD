@@ -46,7 +46,8 @@ int main()
 		while(!num1.empty())
 			newNum.push(num1.pop());
 	}
-		
+	if (residue != 0)
+		newNum.push(residue);
 	while(!newNum.empty())
 		std::cout << newNum.pop();
 
